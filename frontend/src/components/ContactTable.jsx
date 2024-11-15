@@ -3,11 +3,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
-const ContactTable = ({ setDeleteId, setDeleteDialog, contacts, onEdit }) => {
-  const [pageSize, setPageSize] = useState(8);
-
+const ContactTable = ({
+  search,
+  setDeleteId,
+  setDeleteDialog,
+  contacts,
+  onEdit,
+}) => {
   const columns = [
     { field: "firstName", headerName: "First Name", flex: 1.15 },
     { field: "lastName", headerName: "Last Name", flex: 1.15 },
@@ -38,7 +41,11 @@ const ContactTable = ({ setDeleteId, setDeleteDialog, contacts, onEdit }) => {
     },
   ];
 
-  const rows = contacts.map((contact) => ({
+  const filteredContacts = contacts.filter((contact) =>
+    contact.email.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const rows = filteredContacts.map((contact) => ({
     id: contact._id,
     ...contact,
   }));
@@ -48,9 +55,6 @@ const ContactTable = ({ setDeleteId, setDeleteDialog, contacts, onEdit }) => {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={8}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[5, 8, 20, 50]}
         pagination
         disableSelectionOnClick
         sx={{
@@ -70,6 +74,7 @@ const ContactTable = ({ setDeleteId, setDeleteDialog, contacts, onEdit }) => {
 };
 
 ContactTable.propTypes = {
+  search: PropTypes.string.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,

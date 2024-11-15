@@ -16,6 +16,7 @@ import ContactTable from "../components/ContactTable";
 import axiosInstance from "../util/interceptor";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
+import { TextField } from "@mui/material";
 
 const HomePage = () => {
   const [contacts, setContacts] = useState([]);
@@ -31,6 +32,7 @@ const HomePage = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [deleteId, setDeleteId] = useState("");
   const [deleteDialog, setDeleteDialog] = useState(false);
+  const [search, setSearch] = useState("");
 
   const fetchContacts = async () => {
     try {
@@ -127,15 +129,25 @@ const HomePage = () => {
         }}
       >
         <Typography variant="h5">User List</Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ borderRadius: 2, backgroundColor: "black" }}
-          onClick={() => setOpenDialog(true)}
-        >
-          Add User
-          <AddIcon sx={{ ml: 1 }} />
-        </Button>
+        <div>
+          <TextField
+            placeholder="Search for email"
+            variant="outlined"
+            size="small"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            sx={{ marginRight: 2 }}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ borderRadius: 2, backgroundColor: "black" }}
+            onClick={() => setOpenDialog(true)}
+          >
+            Add User
+            <AddIcon sx={{ ml: 1 }} />
+          </Button>
+        </div>
       </Box>
       <Box
         sx={{
@@ -145,6 +157,7 @@ const HomePage = () => {
         }}
       >
         <ContactTable
+          search={search}
           setDeleteId={setDeleteId}
           setDeleteDialog={setDeleteDialog}
           contacts={contacts}

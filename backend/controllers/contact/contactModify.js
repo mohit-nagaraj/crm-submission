@@ -22,7 +22,14 @@ export const createContact = async (req, res) => {
       data: contact,
     });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    if (error.name === "ValidationError") {
+      return res.status(400).json({ message: error.message });
+    }
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyValue)[0];
+      return res.status(400).json({ message: `Duplicate value for ${field}` });
+    }
+    res.status(500).json({ message: "Server error" });
   }
 };
 

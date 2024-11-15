@@ -16,11 +16,13 @@ const contactSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      match: [/.+\@.+\..+/, "Please enter a valid email address"],
     },
     phoneNumber: {
       type: String,
       required: true,
       trim: true,
+      unique: true,
     },
     company: {
       type: String,
