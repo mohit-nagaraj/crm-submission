@@ -1,8 +1,30 @@
-# React + Vite
+# Frontend for CRM Submission
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the CRM Submission project. It is built using React and Vite. Its using basic mui components and react-router-dom for routing at home page.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Before you begin, ensure you have met the following requirements:
+- You have installed Node.js and npm.
+
+## Installation
+
+1. Navigate to the frontend directory:
+    ```sh
+    cd frontend
+    ```
+
+2. Install the dependencies:
+    ```sh
+    npm install
+    ```
+
+## Running the Application
+
+To start the application in development mode, run:
+```sh
+npm run dev
+```
+
+### Preview
+![Screenshot of the ui](image.png)
